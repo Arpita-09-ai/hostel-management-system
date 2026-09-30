@@ -1,178 +1,185 @@
+# 🏠 Hostel Management System
 
-              HOSTEL MANAGEMENT SYSTEM
-                 VSSUT GIRLS' HOSTELS
-
-
-DESCRIPTION
-------------------------------------------------------------
-The Hostel Management System is a web-based application
-developed to simplify and digitize hostel administration
-at VSSUT. It provides a centralized platform for students
-and administrators to manage hostel-related activities.
-
-PROBLEM STATEMENT
-------------------------------------------------------------
-The Hostel Managing Website solves the inefficiency of
-manual hostel administration by digitizing room allocation,
-outpass, food, complaints, and student management.
-
-OBJECTIVES
-------------------------------------------------------------
-* Centralize hostel management in one platform.
-* Provide secure login for students and administrators.
-* Manage room allocation and student records.
-* Digitize outpass requests and approvals.
-* Manage food and community-related services.
-* Provide an organized complaint-handling system.
-
-KEY FEATURES
-------------------------------------------------------------
-
-STUDENT
-  |
-  +-- Login
-  +-- View Hostel Details
-  +-- View Room Allocation
-  +-- Apply for Outpass
-  +-- Check Outpass Status
-  +-- Food Information
-  +-- Community Activities
-  +-- Submit Complaints
-  +-- Logout
-
-ADMIN
-  |
-  +-- Login
-  +-- Manage Students
-  +-- Manage Hostels & Rooms
-  +-- Approve/Reject Outpass
-  +-- Manage Food Services
-  +-- Handle Complaints
-  +-- Manage Community
-  +-- Update Records
-  +-- Logout
-
-SYSTEM MODULES
-------------------------------------------------------------
-
-                    +-----------------------+
-                    |  HOSTEL MANAGEMENT    |
-                    |       SYSTEM          |
-                    +-----------+-----------+
-                                |
-          +---------------------+---------------------+
-          |           |          |         |          |
-          v           v          v         v          v
-     +---------+ +---------+ +------+ +----------+ +----------+
-     |  Room   | | Outpass | | Food | |Complaint | |Community |
-     |Allocation| |Management| |Mgmt | | Handling | |Management|
-     +---------+ +---------+ +------+ +----------+ +----------+
-                                |
-                                v
-                       +----------------+
-                       | Student Records|
-                       +----------------+
-
-WORKFLOW
-------------------------------------------------------------
-
-        +-------+
-        | START |
-        +---+---+
-            |
-            v
-       +---------+
-       |  LOGIN  |
-       +----+----+
-            |
-            v
-   +-------------------+
-   | Authentication    |
-   |    Successful?    |
-   +---------+---------+
-             |
-       +-----+-----+
-       |           |
-      YES          NO
-       |           |
-       v           +-----> Login Again
-+--------------+
-| Select User  |
-| Student/Admin|
-+------+-------+
-       |
-   +---+---+
-   |       |
-Student   Admin
-   |       |
-   v       v
-Dashboard Dashboard
-   |       |
-   |       +-- Manage Rooms
-   |       +-- Approve Outpass
-   |       +-- Manage Food
-   |       +-- Handle Complaints
-   |       +-- Update Records
-   |
-   +-- View Hostel/Room
-   +-- Apply Outpass
-   +-- Food Services
-   +-- Community
-   +-- Submit Complaint
-   |
-   +-------+-------+
-           |
-           v
-       +--------+
-       | LOGOUT |
-       +----+---+
-            |
-            v
-         +-----+
-         | END |
-         +-----+
-
-OOP CONCEPTS
-------------------------------------------------------------
-* Classes and Objects
-* Encapsulation
-* Inheritance
-* Polymorphism
-* Abstraction
-
-TECHNOLOGIES
-------------------------------------------------------------
-Frontend  : HTML / CSS / JavaScript
-Concept   : Object-Oriented Programming (OOP)
-
-PROJECT STRUCTURE
-------------------------------------------------------------
-
-Hostel-Management-System/
-|
-+-- frontend/
-|
-+-- backend/
-|
-+-- database/
-|
-+-- assets/
-|
-+-- README.md
-|
-+-- ...
-
-FUTURE ENHANCEMENTS
-------------------------------------------------------------
-* Online hostel fee management
-* Attendance management
-* Automated notifications
-* Email/SMS alerts
-* Maintenance request system
-* Advanced admin dashboard
-* Mobile application
+A web-based Hostel Management System designed for managing
+girls' hostels at VSSUT through a centralized platform.
 
 ------------------------------------------------------------
-        Developed as an Academic OOP Project
-                         VSSUT
+
+## 📌 Problem Statement
+
+The Hostel Managing Website solves the inefficiency of manual
+hostel administration by digitizing room allocation, outpass,
+food, complaints, and student management.
+
+------------------------------------------------------------
+
+## 🎯 Objective
+
+To develop a centralized platform that simplifies hostel
+management and provides students with easy access to
+essential hostel services.
+
+------------------------------------------------------------
+
+## ✨ Features
+
+### 👩‍🎓 Student
+
+    ├── 🔐 Login / Authentication
+    ├── 🏠 View Hostel Details
+    ├── 🛏️ View Room Allocation
+    ├── 🚪 Apply for Outpass
+    ├── 🍽️ View Food Information
+    ├── 👥 Community Management
+    ├── 📝 Submit Complaints
+    └── 🚪 Logout
+
+### 👩‍💼 Admin
+
+    ├── 🔐 Admin Login
+    ├── 👩‍🎓 Manage Students
+    ├── 🏠 Manage Hostels & Rooms
+    ├── 🚪 Approve / Reject Outpass
+    ├── 🍽️ Manage Food Services
+    ├── 📝 Handle Complaints
+    ├── 👥 Manage Community
+    └── 📋 Update Student Records
+
+------------------------------------------------------------
+
+## 🏗️ System Architecture
+
+                         ┌───────────────────┐
+                         │       USERS       │
+                         └─────────┬─────────┘
+                                   │
+                    ┌──────────────┴──────────────┐
+                    │                             │
+              ┌─────▼─────┐                 ┌─────▼─────┐
+              │  STUDENT  │                 │   ADMIN   │
+              └─────┬─────┘                 └─────┬─────┘
+                    │                             │
+                    └──────────────┬──────────────┘
+                                   │
+                         ┌─────────▼─────────┐
+                         │ HOSTEL MANAGEMENT │
+                         │      WEBSITE      │
+                         └─────────┬─────────┘
+                                   │
+        ┌──────────────┬───────────┼───────────┬──────────────┐
+        │              │           │           │              │
+   ┌────▼────┐    ┌────▼────┐ ┌────▼────┐ ┌───▼─────┐  ┌─────▼─────┐
+   │  Room   │    │ Outpass │ │  Food   │ │Complaints│  │ Community  │
+   │Allocation│   │Management│ │Management│ │ Handling │  │Management │
+   └─────────┘    └─────────┘ └─────────┘ └─────────┘  └───────────┘
+                                   │
+                            ┌──────▼──────┐
+                            │   Student   │
+                            │   Records   │
+                            └─────────────┘
+
+------------------------------------------------------------
+
+## 🔄 Workflow
+
+                       ┌───────────┐
+                       │   START   │
+                       └─────┬─────┘
+                             │
+                             ▼
+                       ┌───────────┐
+                       │   LOGIN   │
+                       └─────┬─────┘
+                             │
+                             ▼
+                    ┌──────────────────┐
+                    │ Authentication   │
+                    │     Successful?  │
+                    └────────┬─────────┘
+                             │
+                       ┌─────┴─────┐
+                      YES          NO
+                       │            │
+                       ▼            └──► Login Again
+                 ┌────────────┐
+                 │ Select Role│
+                 └──────┬─────┘
+                        │
+                 ┌──────┴──────┐
+                 │             │
+                 ▼             ▼
+            ┌─────────┐   ┌─────────┐
+            │ STUDENT │   │  ADMIN  │
+            └────┬────┘   └────┬────┘
+                 │             │
+                 ▼             ▼
+            Dashboard      Dashboard
+                 │             │
+        ┌────────┼───────┐     ├── Manage Rooms
+        │        │       │     ├── Manage Students
+        ▼        ▼       ▼     ├── Approve Outpass
+      Room    Outpass   Food   ├── Manage Food
+        │        │       │     ├── Handle Complaints
+        └────────┼───────┘     └── Update Records
+                 │
+                 ▼
+             Complaints
+                 │
+                 ▼
+              Logout
+                 │
+                 ▼
+              ┌─────┐
+              │ END │
+              └─────┘
+
+------------------------------------------------------------
+
+## 🛠️ Technologies Used
+
+    Frontend   : HTML, CSS, JavaScript
+    Concepts   : Object-Oriented Programming (OOP)
+
+------------------------------------------------------------
+
+## 🧠 OOP Concepts
+
+    • Classes & Objects
+    • Encapsulation
+    • Inheritance
+    • Polymorphism
+    • Abstraction
+
+------------------------------------------------------------
+
+## 📂 Project Structure
+
+    Hostel-Management-System/
+    │
+    ├── frontend/
+    ├── backend/
+    ├── database/
+    ├── assets/
+    ├── README.md
+    └── ...
+
+------------------------------------------------------------
+
+## 🚀 Future Enhancements
+
+    • Online hostel fee management
+    • Attendance management
+    • Automated notifications
+    • Maintenance request system
+    • Email / SMS notifications
+    • Mobile application
+
+------------------------------------------------------------
+
+## 👨‍💻 Project
+
+    Project Type : OOP Academic Project
+    Institution  : VSSUT
+    Domain       : Hostel Management
+
 ------------------------------------------------------------
