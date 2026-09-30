@@ -143,8 +143,6 @@ OOP CONCEPTS
 TECHNOLOGIES
 ------------------------------------------------------------
 Frontend  : HTML / CSS / JavaScript
-Backend   : [Add your technology]
-Database  : [Add your database]
 Concept   : Object-Oriented Programming (OOP)
 
 PROJECT STRUCTURE
