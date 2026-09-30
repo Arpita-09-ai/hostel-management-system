@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Hostel Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🏫 Admin Dashboard</h1>
+
+    <div class="menu">
+      <button onclick="viewStudents()">View Registered Students</button>
+      <button onclick="viewOutpasses()">View Outpass Requests</button>
+      <button onclick="viewComplaints()">View Complaints</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="output" class="output-box"></div>
+  </div>
+
+  <script>
+    // Function to view all registered students
+    function viewStudents() {
+      const students = JSON.parse(localStorage.getItem('students')) || [];
+      let html = "<h2>Registered Students</h2>";
+
+      if (students.length === 0) {
+        html += "<p>No students registered yet.</p>";
+      } else {
+        html += "<table><tr><th>Name</th><th>Room</th><th>Username</th></tr>";
+        students.forEach(s => {
+          html += `<tr><td>${s.name}</td><td>${s.room}</td><td>${s.username}</td></tr>`;
+        });
+        html += "</table>";
+      }
+
+      document.getElementById("output").innerHTML = html;
+    }
+
+    // Function to view all outpass requests
+    function viewOutpasses() {
+      const outpasses = JSON.parse(localStorage.getItem('outpasses')) || [];
+      let html = "<h2>Outpass Requests</h2>";
+
+      if (outpasses.length === 0) {
+        html += "<p>No outpass requests available.</p>";
+      } else {
+        html += "<table><tr><th>Name</th><th>Room</th><th>Reason</th><th>Status</th><th>Action</th></tr>";
+        outpasses.forEach((o, index) => {
+          html += `<tr>
+            <td>${o.name}</td>
+            <td>${o.room}</td>
+            <td>${o.reason}</td>
+            <td>${o.status}</td>
+            <td>
+              <button onclick="updateStatus(${index}, 'Approved')">Approve</button>
+              <button onclick="updateStatus(${index}, 'Rejected')">Reject</button>
+            </td>
+          </tr>`;
+        });
+        html += "</table>";
+      }
+
+      document.getElementById("output").innerHTML = html;
+    }
+
+    // Update status of outpass (Approve/Reject)
+    function updateStatus(index, newStatus) {
+      const outpasses = JSON.parse(localStorage.getItem('outpasses')) || [];
+      outpasses[index].status = newStatus;
+      localStorage.setItem('outpasses', JSON.stringify(outpasses));
+      alert(`Outpass ${newStatus}!`);
+      viewOutpasses();
+    }
+
+    // Function to view complaints
+    function viewComplaints() {
+      const complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+      let html = "<h2>Complaints</h2>";
+
+      if (complaints.length === 0) {
+        html += "<p>No complaints registered yet.</p>";
+      } else {
+        html += "<table><tr><th>Name</th><th>Room</th><th>Complaint</th></tr>";
+        complaints.forEach(c => {
+          html += `<tr><td>${c.name}</td><td>${c.room}</td><td>${c.complaint}</td></tr>`;
+        });
+        html += "</table>";
+      }
+
+      document.getElementById("output").innerHTML = html;
+    }
+
+    // Logout function
+    function logout() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

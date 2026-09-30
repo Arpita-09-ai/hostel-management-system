@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Hostel Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🏫 Student Dashboard</h1>
+
+    <div class="menu">
+      <button onclick="viewProfile()">View My Details</button>
+      <button onclick="requestOutpass()">Request Outpass</button>
+      <button onclick="registerComplaint()">Register Complaint</button>
+      <button onclick="viewMyOutpasses()">View My Outpass Status</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="output" class="output-box"></div>
+  </div>
+
+  <script>
+    // Get the logged-in student
+    const currentUser = JSON.parse(localStorage.getItem("currentStudent"));
+
+    if (!currentUser) {
+      alert("Please login first!");
+      window.location.href = "index.html";
+    }
+
+    // View profile details
+    function viewProfile() {
+      const s = currentUser;
+      document.getElementById("output").innerHTML = `
+        <h2>My Profile</h2>
+        <p><strong>Name:</strong> ${s.name}</p>
+        <p><strong>Room No:</strong> ${s.room}</p>
+        <p><strong>Username:</strong> ${s.username}</p>
+      `;
+    }
+
+    // Request an outpass
+    function requestOutpass() {
+      const reason = prompt("Enter the reason for your outpass request:");
+      if (reason) {
+        const outpasses = JSON.parse(localStorage.getItem("outpasses")) || [];
+        outpasses.push({
+          name: currentUser.name,
+          room: currentUser.room,
+          reason,
+          status: "Pending"
+        });
+        localStorage.setItem("outpasses", JSON.stringify(outpasses));
+        alert("Outpass request submitted! Status: Pending 🟡");
+      }
+    }
+
+    // Register a complaint
+    function registerComplaint() {
+      const complaint = prompt("Enter your complaint:");
+      if (complaint) {
+        const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+        complaints.push({
+          name: currentUser.name,
+          room: currentUser.room,
+          complaint
+        });
+        localStorage.setItem("complaints", JSON.stringify(complaints));
+        alert("Complaint registered successfully 📝");
+      }
+    }
+
+    // View student's own outpasses
+    function viewMyOutpasses() {
+      const outpasses = JSON.parse(localStorage.getItem("outpasses")) || [];
+      const myOutpasses = outpasses.filter(o => o.name === currentUser.name);
+
+      let html = "<h2>My Outpass Requests</h2>";
+      if (myOutpasses.length === 0) {
+        html += "<p>No outpass requests yet.</p>";
+      } else {
+        html += "<table><tr><th>Reason</th><th>Status</th></tr>";
+        myOutpasses.forEach(o => {
+          const color =
+            o.status === "Approved" ? "green" :
+            o.status === "Rejected" ? "red" : "orange";
+          html += `<tr>
+            <td>${o.reason}</td>
+            <td style="color:${color}; font-weight:bold;">${o.status}</td>
+          </tr>`;
+        });
+        html += "</table>";
+      }
+      document.getElementById("output").innerHTML = html;
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem("currentStudent");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
